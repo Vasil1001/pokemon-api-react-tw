@@ -86,7 +86,7 @@ export default function SelectedPokemonCard() {
       </div>
       <span
         style={{ fontFamily: "Pokemon-Hollow" }}
-        className="flex justify-between text-yellow-400 text-5xl  mb-4"
+        className="flex tracking-widest	justify-between text-yellow-400 text-5xl  mb-4"
       >
         Pokemon
         <p className="text-5xl">#{selectedPokemon.id}</p>
@@ -95,7 +95,7 @@ export default function SelectedPokemonCard() {
         <div>
           <p
             style={{ fontFamily: "Pokemon-Hollow" }}
-            className="tracking-wider text-8xl mb-14 text-red-400"
+            className=" text-8xl mb-14 text-red-400"
           >
             {selectedPokemon.name}
           </p>

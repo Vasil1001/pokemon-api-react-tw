@@ -95,7 +95,7 @@ export default function SelectedPokemonCard() {
         <div>
           <p
             style={{ fontFamily: "Pokemon-Hollow" }}
-            className="tracking-wider text-8xl mb-14 text-red-400"
+            className=" text-8xl mb-14 text-red-400"
           >
             {selectedPokemon.name}
           </p>
@@ -110,7 +110,7 @@ export default function SelectedPokemonCard() {
                 </p>
                 <p className="font-bold text-xl">#{selectedPokemon.id}</p>
               </div>
-              <p className="text-sm">Capture rate: {(evolutionChain.capture_rate/255*100).toFixed()}% - {evolutionChain.capture_rate}/255 </p>
+              <p className="text-sm">Capture rate: ({(evolutionChain.capture_rate/255*100).toFixed()}%) {evolutionChain.capture_rate} </p>
 
               <div>
                 <img

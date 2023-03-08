@@ -95,7 +95,7 @@ export default function SelectedPokemonCard() {
         <div>
           <p
             style={{ fontFamily: "Pokemon-Hollow" }}
-            className="tracking-wider text-8xl mb-14 text-red-400"
+            className="tracking-wide text-8xl mb-14 text-red-400"
           >
             {selectedPokemon.name}
           </p>

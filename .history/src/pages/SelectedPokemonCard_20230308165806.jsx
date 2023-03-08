@@ -18,16 +18,16 @@ export default function SelectedPokemonCard() {
     return setSelectedPokemon(data)
   }
 
-  const fetch_type_details = async () => {
-    const response = await fetch(`https://pokeapi.co/api/v2/type/2`)
-    const data = await response.json()
-    return setTypeDetails(data)
+  const fetch_type_details = () => {
+    return fetch(`https://pokeapi.co/api/v2/type/2`)
+          .then((response) => response.json())
+          .then((data) => setTypeDetails(data));
   }
 
-  const fetch_evolution_chain = async () => {
-    const response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${params.pokemonName}`)
-    const data = await response.json()
-    return setEvolutionChain(data)
+  const fetch_evolution_chain = () => {
+    return fetch(`https://pokeapi.co/api/v2/pokemon-species/${params.pokemonName}`)
+          .then((response) => response.json())
+          .then((data) => setEvolutionChain(data));
   }
 
   useEffect(() => {
@@ -43,8 +43,7 @@ export default function SelectedPokemonCard() {
     if (dataFetchedRef.current) return
     dataFetchedRef.current = true
     fetchSelectedPokemon()
-    fetch_type_details()
-    fetch_evolution_chain()
+
     // async function fetch_type_details() {
     //   const response = await fetch(`https://pokeapi.co/api/v2/type/2`)
     //   const data = await response.json()
@@ -95,7 +94,7 @@ export default function SelectedPokemonCard() {
         <div>
           <p
             style={{ fontFamily: "Pokemon-Hollow" }}
-            className="tracking-wider text-8xl mb-14 text-red-400"
+            className=" text-8xl mb-14 text-red-400"
           >
             {selectedPokemon.name}
           </p>
@@ -110,7 +109,7 @@ export default function SelectedPokemonCard() {
                 </p>
                 <p className="font-bold text-xl">#{selectedPokemon.id}</p>
               </div>
-              <p className="text-sm">Capture rate: {(evolutionChain.capture_rate/255*100).toFixed()}% - {evolutionChain.capture_rate}/255 </p>
+              <p className="text-sm">Capture rate: {evolutionChain.capture_rate} ({evolutionChain.capture_rate/255*100}%)</p>
 
               <div>
                 <img

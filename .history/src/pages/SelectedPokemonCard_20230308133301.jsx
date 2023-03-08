@@ -5,64 +5,25 @@ import { IoChevronBackOutline } from "react-icons/io5"
 export default function SelectedPokemonCard() {
   const [selectedPokemon, setSelectedPokemon] = useState([])
   const [typeDetails, setTypeDetails] = useState([])
-  const [evolutionChain, setEvolutionChain] = useState([])
 
   const dataFetchedRef = useRef(false)
 
   const navigate = useNavigate()
   const params = useParams()
 
-  const fetchSelectedPokemon = async () => {
-    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${params.pokemonName}`)
-    const data = await response.json()
-    return setSelectedPokemon(data)
-  }
-
-  const fetch_type_details = async () => {
-    const response = await fetch(`https://pokeapi.co/api/v2/type/2`)
-    const data = await response.json()
-    return setTypeDetails(data)
-  }
-
-  const fetch_evolution_chain = async () => {
-    const response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${params.pokemonName}`)
-    const data = await response.json()
-    return setEvolutionChain(data)
-  }
-
   useEffect(() => {
-    // const fetchSelectedPokemon = async () => {
-    //   const response = await fetch(
-    //     `https://pokeapi.co/api/v2/pokemon/${params.pokemonName}`
-    //   )
-    //   const data = await response.json()
-    //   setSelectedPokemon(data)
-    //   console.log(data)
-    // }
-    
+    const fetchSelectedPokemon = async () => {
+      const response = await fetch(
+        `https://pokeapi.co/api/v2/pokemon/${params.pokemonName}`
+      )
+      const data = await response.json()
+      setSelectedPokemon(data)
+      console.log(data)
+    }
     if (dataFetchedRef.current) return
     dataFetchedRef.current = true
     fetchSelectedPokemon()
-    fetch_type_details()
-    fetch_evolution_chain()
-    // async function fetch_type_details() {
-    //   const response = await fetch(`https://pokeapi.co/api/v2/type/2`)
-    //   const data = await response.json()
-    //   setTypeDetails(data)
-    //   console.log(data)
-    // }
-    // fetch_type_details()
-    
-    // async function fetch_evolution_chain() {
-    //   const response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${params.pokemonName}`)
-    //   const data = await response.json()
-    //   setEvolutionChain(data)
-    //   console.log(data)
-    // }
-    // fetch_evolution_chain()
 
-
-    
     // const fetch_type_details = async () => {
     //   const response = await fetch(
     //     `${selectedPokemon.types[0].type.url}`
@@ -73,6 +34,14 @@ export default function SelectedPokemonCard() {
     //   console.log(data)
     // }
     // fetch_type_details()
+
+    async function fetch_type_details() {
+      const response = await fetch(`https://pokeapi.co/api/v2/type/2`)
+      const data = await response.json()
+      setTypeDetails(data)
+      console.log(data)
+    }
+    fetch_type_details()
   }, [params.pokemonName])
 
   return (
@@ -95,23 +64,20 @@ export default function SelectedPokemonCard() {
         <div>
           <p
             style={{ fontFamily: "Pokemon-Hollow" }}
-            className="tracking-wider text-8xl mb-14 text-red-400"
+            className=" text-8xl mb-14 text-red-400"
           >
             {selectedPokemon.name}
           </p>
-          
           <div className="grid grid-cols-6 gap-3 text-slate-800">
             <div className="flex flex-col justify-between col-span-6 sm:col-span-6 md:col-span-2 lg:col-span-2 xl:col-span-2 px-7 py-3 bg-slate-300 rounded-lg">
               {/* <img src={selectedPokemon.sprites.front_default} alt="" /> */}
-              <div className="flex justify-between mb-0">
+              <div className="flex justify-between mb-5">
                 <p className="font-bold text-xl">
                   {selectedPokemon.name.toUpperCase().slice(0, 1)}
                   {selectedPokemon.name.toLowerCase().slice(1)}
                 </p>
                 <p className="font-bold text-xl">#{selectedPokemon.id}</p>
               </div>
-              <p className="text-sm">Capture rate: {(evolutionChain.capture_rate/255*100).toFixed()}% - {evolutionChain.capture_rate}/255 </p>
-
               <div>
                 <img
                   src={
@@ -122,12 +88,12 @@ export default function SelectedPokemonCard() {
                   alt="front-cover"
                 />
               </div>
+              <p className="font-bold text-xl"></p>
             </div>
             <div className="bg-slate-300 flex flex-col justify-between font-bold text-xl text-slate-800 gap-3 col-span-6 sm:col-span-6 md:col-span-4 lg:col-span-4 xl:col-span-4 px-7 py-3 rounded-lg">
               Stats
               <div className="flex text-base gap-2 justify-between items-center">
                 <p className="text-base w-20">Hp</p>
-                
 
                 <progress
                   className="progress progress-info w-full h-6"
@@ -184,7 +150,8 @@ export default function SelectedPokemonCard() {
             </div>
 
             <div className="flex flex-col bg-slate-300 px-7 py-3 col-span-3 p-10 rounded-lg">
-              <p className="font-bold text-xl mb-1">Type Details</p>
+              <p className="font-bold text-xl">Details</p>
+              <p className="font-bold mb-1 mt-2">Type</p>
 
               <div className="flex gap-3">
                 {selectedPokemon.types
@@ -197,26 +164,10 @@ export default function SelectedPokemonCard() {
                     ))
                   : "Types not available"}
               </div>
-              <p className="font-bold mb-1 mt-5">Double Damage to </p>
-              <div className="flex flex-wrap gap-3">
-                {typeDetails.damage_relations
-                  ? typeDetails.damage_relations.double_damage_to.map(
-                      (type, index) => (
-                        <div>
-                          <p className="p-1 px-2 font-bold  ring-2 ring-slate-700 shadow-lg rounded-lg bg-green-400">
-                            {type.name}
-                          </p>
-                        </div>
-                      )
-                    )
-                  : "Types not available"}
-              </div>
 
-              
-
-              <p className="font-bold mb-1 mt-5">Weaknesses (Half Damage)</p>
-              <div className="flex flex-wrap gap-3">
-                {typeDetails.damage_relations
+              <p className="font-bold mb-1 mt-5">Weaknesses (Half Damage/2)</p>
+              <div className="flex gap-3">
+                {typeDetails
                   ? typeDetails.damage_relations.half_damage_to.map(
                       (type, index) => (
                         <div>
@@ -229,23 +180,7 @@ export default function SelectedPokemonCard() {
                   : "Types not available"}
               </div>
 
-              <p className="font-bold mb-1 mt-5">Counters - No damage to </p>
-              <div className="flex flex-wrap gap-3">
-                {typeDetails.damage_relations
-                  ? typeDetails.damage_relations.no_damage_to.map(
-                      (type, index) => (
-                        <div>
-                          <p className="p-1 px-2 font-bold  ring-2 ring-slate-700 shadow-lg rounded-lg bg-gray-400">
-                            {type.name}
-                          </p>
-                        </div>
-                      )
-                    )
-                  : "Types not available"}
-              </div>
             </div>
-
-            
             <div className="flex flex-col overflow-x-auto bg-slate-300 px-7 py-3 col-span-3 p-10 rounded-lg">
               <p className="font-bold text-xl">Images</p>
 

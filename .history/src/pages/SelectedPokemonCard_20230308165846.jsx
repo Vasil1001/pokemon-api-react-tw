@@ -44,7 +44,6 @@ export default function SelectedPokemonCard() {
     dataFetchedRef.current = true
     fetchSelectedPokemon()
     fetch_type_details()
-    fetch_evolution_chain()
     // async function fetch_type_details() {
     //   const response = await fetch(`https://pokeapi.co/api/v2/type/2`)
     //   const data = await response.json()
@@ -95,7 +94,7 @@ export default function SelectedPokemonCard() {
         <div>
           <p
             style={{ fontFamily: "Pokemon-Hollow" }}
-            className="tracking-wider text-8xl mb-14 text-red-400"
+            className=" text-8xl mb-14 text-red-400"
           >
             {selectedPokemon.name}
           </p>
@@ -110,7 +109,7 @@ export default function SelectedPokemonCard() {
                 </p>
                 <p className="font-bold text-xl">#{selectedPokemon.id}</p>
               </div>
-              <p className="text-sm">Capture rate: {(evolutionChain.capture_rate/255*100).toFixed()}% - {evolutionChain.capture_rate}/255 </p>
+              <p className="text-sm">Capture rate: {evolutionChain.capture_rate} ({evolutionChain.capture_rate/255*100}%)</p>
 
               <div>
                 <img
