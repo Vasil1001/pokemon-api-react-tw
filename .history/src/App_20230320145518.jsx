@@ -57,7 +57,7 @@ function App() {
               }
             />
             <Route
-              path="/pokemons/:pokemonName/:pokemonType"
+              path="/pokemons/:pokemonName"
               element={<SelectedPokemonCard />}
             />
           </Routes>

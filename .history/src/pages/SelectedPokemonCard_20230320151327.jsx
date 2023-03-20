@@ -28,7 +28,6 @@ export default function SelectedPokemonCard() {
   const fetch_evolution_chain = async () => {
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${params.pokemonName}`)
     const data = await response.json()
-    console.log(data)
     return setEvolutionChain(data)
   }
 

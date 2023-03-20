@@ -20,7 +20,7 @@ export default function SelectedPokemonCard() {
   }
 
   const fetch_type_details = async () => {
-    const response = await fetch(`https://pokeapi.co/api/v2/type/${params.pokemonType}`)
+    const response = await fetch(`https://pokeapi.co/api/v2/type/5`)
     const data = await response.json()
     return setTypeDetails(data)
   }
@@ -28,7 +28,6 @@ export default function SelectedPokemonCard() {
   const fetch_evolution_chain = async () => {
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${params.pokemonName}`)
     const data = await response.json()
-    console.log(data)
     return setEvolutionChain(data)
   }
 

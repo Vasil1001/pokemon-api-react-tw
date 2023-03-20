@@ -28,7 +28,6 @@ export default function SelectedPokemonCard() {
   const fetch_evolution_chain = async () => {
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${params.pokemonName}`)
     const data = await response.json()
-    console.log(data)
     return setEvolutionChain(data)
   }
 
@@ -174,6 +173,17 @@ export default function SelectedPokemonCard() {
               </div>
               <p className="font-bold mb-1 mt-5">Double Damage to </p>
               <div className="flex flex-wrap gap-3">
+                {!typeDetails ? <div>Loading...</div> : typeDetails.damage_relations
+                  ? typeDetails.damage_relations.double_damage_to.map(
+                      (type, index) => (
+                        <div>
+                          <p className="p-1 px-2 font-bold  ring-2 ring-slate-700 shadow-lg rounded-lg bg-green-400">
+                            {type.name}
+                          </p>
+                        </div>
+                      )
+                    )
+                  : "Types not available"}
                 {typeDetails.damage_relations
                   ? typeDetails.damage_relations.double_damage_to.map(
                       (type, index) => (

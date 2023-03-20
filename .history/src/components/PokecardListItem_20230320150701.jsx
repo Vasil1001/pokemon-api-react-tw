@@ -6,7 +6,7 @@ export default function PokecardListItem({ pokemon }) {
   return (
     <div className="mx-auto flex flex-col min-w-full min-h-full gap-3 p-2 bg-slate-300 rounded-xl">
       
-      <Link to={`/pokemons/${pokemon.name}/${pokemon.types[0].type.name}`}>
+      <Link to={`/pokemons/${pokemon.name}/${pokemon.types}`}>
         <p className="text-xl font-bold text-slate-700">
           {pokemon.id}. {name}
         </p>

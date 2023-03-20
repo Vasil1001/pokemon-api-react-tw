@@ -20,15 +20,15 @@ export default function SelectedPokemonCard() {
   }
 
   const fetch_type_details = async () => {
-    const response = await fetch(`https://pokeapi.co/api/v2/type/${params.pokemonType}`)
+    const response = await fetch(`https://pokeapi.co/api/v2/type/`)
     const data = await response.json()
+    console.log(data)
     return setTypeDetails(data)
   }
 
   const fetch_evolution_chain = async () => {
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${params.pokemonName}`)
     const data = await response.json()
-    console.log(data)
     return setEvolutionChain(data)
   }
 

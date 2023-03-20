@@ -20,7 +20,7 @@ export default function SelectedPokemonCard() {
   }
 
   const fetch_type_details = async () => {
-    const response = await fetch(`https://pokeapi.co/api/v2/type/${params.pokemonType}`)
+    const response = await fetch(`https://pokeapi.co/api/v2/type/`)
     const data = await response.json()
     return setTypeDetails(data)
   }
@@ -28,7 +28,6 @@ export default function SelectedPokemonCard() {
   const fetch_evolution_chain = async () => {
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${params.pokemonName}`)
     const data = await response.json()
-    console.log(data)
     return setEvolutionChain(data)
   }
 
@@ -166,7 +165,7 @@ export default function SelectedPokemonCard() {
                   ? selectedPokemon.types.map((type, index) => (
                       <div>
                         <p className="p-1 px-3 font-bold  ring-2 ring-slate-700 shadow-lg rounded-lg bg-yellow-300">
-                          {selectedPokemon.types[index].type.name}
+                        {key={index}}{selectedPokemon.types[index].type.name}
                         </p>
                       </div>
                     ))

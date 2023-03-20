@@ -15,12 +15,11 @@ export default function SelectedPokemonCard() {
   const fetchSelectedPokemon = async () => {
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${params.pokemonName}`)
     const data = await response.json()
-    console.log(data)
     return setSelectedPokemon(data)
   }
 
   const fetch_type_details = async () => {
-    const response = await fetch(`https://pokeapi.co/api/v2/type/${params.pokemonType}`)
+    const response = await fetch(`https://pokeapi.co/api/v2/type/2`)
     const data = await response.json()
     return setTypeDetails(data)
   }
@@ -28,7 +27,6 @@ export default function SelectedPokemonCard() {
   const fetch_evolution_chain = async () => {
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${params.pokemonName}`)
     const data = await response.json()
-    console.log(data)
     return setEvolutionChain(data)
   }
 
@@ -38,10 +36,28 @@ export default function SelectedPokemonCard() {
     fetchSelectedPokemon()
     fetch_type_details()
     fetch_evolution_chain()
+    // async function fetch_type_details() {
+    //   const response = await fetch(`https://pokeapi.co/api/v2/type/2`)
+    //   const data = await response.json()
+    //   setTypeDetails(data)
+    //   console.log(data)
+    // }
+    // fetch_type_details()
+    
+    // async function fetch_evolution_chain() {
+    //   const response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${params.pokemonName}`)
+    //   const data = await response.json()
+    //   setEvolutionChain(data)
+    //   console.log(data)
+    // }
+    // fetch_evolution_chain()
 
+
+    
     // const fetch_type_details = async () => {
     //   const response = await fetch(
     //     `${selectedPokemon.types[0].type.url}`
+
     //   )
     //   const data = await response.json()
     //   setTypeDetails(data)
